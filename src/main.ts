@@ -1,27 +1,27 @@
 import "./style.css";
-import typescriptLogo from "./typescript.svg";
-import viteLogo from "/vite.svg";
-import { setupCounter } from "./counter.ts";
+// import typescriptLogo from "./typescript.svg";
+// import viteLogo from "/vite.svg";
+// import { setupCounter } from "./counter.ts";
 
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`;
+// document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+//   <div>
+//     <a href="https://vite.dev" target="_blank">
+//       <img src="${viteLogo}" class="logo" alt="Vite logo" />
+//     </a>
+//     <a href="https://www.typescriptlang.org/" target="_blank">
+//       <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
+//     </a>
+//     <h1>Vite + TypeScript</h1>
+//     <div class="card">
+//       <button id="counter" type="button"></button>
+//     </div>
+//     <p class="read-the-docs">
+//       Click on the Vite and TypeScript logos to learn more
+//     </p>
+//   </div>
+// `;
 
-setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
+// setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
 
 function fillRect() {
   const canvas = document.getElementById("canvas") as HTMLCanvasElement;
@@ -290,8 +290,74 @@ function drawMultipleTriangle() {
 
 function drawCircles() {
   const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-  if (!canvas.getContext) {
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
     return;
   }
-  const ctx = canvas.getContext("2d");
+  for (let i = 0; i < 4; i += 1) {
+    for (let j = 0; j < 3; j += 1) {
+      ctx.beginPath();
+      const x = 25 + j * 50;
+      const y = 25 + i * 50;
+
+      const radius = 20;
+      const startAngle = 0;
+
+      const endAngle = Math.PI + Math.PI * j;
+      const counterClockWise = i % 2 !== 0;
+
+      ctx.arc(x, y, radius, startAngle, endAngle, counterClockWise);
+      if (i > 1) {
+        ctx.fill();
+      } else {
+        ctx.stroke();
+      }
+    }
+  }
 }
+
+// draw circles
+// drawCircles();
+
+function quadraticBezierCurveImplementation() {
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return;
+  }
+
+  ctx.beginPath();
+  ctx.moveTo(75, 25);
+  ctx.quadraticCurveTo(25, 25, 25, 62.5);
+  ctx.quadraticCurveTo(25, 100, 50, 100);
+  ctx.quadraticCurveTo(50, 120, 30, 125);
+  ctx.quadraticCurveTo(60, 120, 65, 100);
+  ctx.quadraticCurveTo(125, 100, 125, 62.5);
+  ctx.quadraticCurveTo(125, 25, 75, 25);
+  ctx.stroke();
+}
+
+// implement quadratic bezier curve
+// quadraticBezierCurveImplementation();
+
+function drawHeart() {
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return;
+  }
+
+  ctx.beginPath();
+  ctx.moveTo(75, 40);
+  ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
+  ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
+  ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
+  ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
+  ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
+  ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
+  ctx.fill();
+}
+// implement cubic bezier curve
+// drawHeart();
