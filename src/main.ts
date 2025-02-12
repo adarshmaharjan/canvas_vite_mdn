@@ -492,4 +492,187 @@ function drawPacman() {
 }
 
 // draw pacman
-drawPacman();
+// drawPacman();
+
+function drawIlluminatiTriangle() {
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    return;
+  }
+  const sideLength = 300;
+  const secondarySideLength = 100;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(sideLength, 0);
+  ctx.lineTo(sideLength / 2, sideLength);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  const secondaryStartingPoint = sideLength / 3;
+  ctx.moveTo(secondaryStartingPoint, secondaryStartingPoint);
+  ctx.lineTo(
+    secondarySideLength + secondaryStartingPoint,
+    secondaryStartingPoint
+  );
+
+  ctx.lineTo(secondarySideLength + secondaryStartingPoint / 2, 30);
+  ctx.closePath();
+  ctx.fillStyle = "lightGreen";
+  ctx.fill();
+}
+
+// implement triangle with a spaced triangle
+// drawIlluminatiTriangle();
+
+function triangleWithHole() {
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+  if (canvas.getContext) {
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      return;
+    }
+    ctx.beginPath();
+
+    // Outer shape clockwise ⟳
+    ctx.moveTo(0, 0);
+    ctx.lineTo(150, 0);
+    ctx.lineTo(75, 129.9);
+
+    // Inner shape anticlockwise ↺
+    ctx.moveTo(75, 20);
+    ctx.lineTo(50, 60);
+    ctx.lineTo(100, 60);
+
+    ctx.fill();
+  }
+}
+
+// draw triangle with hole
+// triangleWithHole();
+
+function implementPath2D() {
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    return;
+  }
+
+  const rectangle = new Path2D();
+  rectangle.rect(0, 0, 50, 50);
+  ctx.stroke(rectangle);
+
+  const circle = new Path2D();
+  circle.arc(100, 25, 25, 0, 2 * Math.PI);
+  ctx.fill(circle);
+}
+
+// implement path 2d
+// implementPath2D()
+
+// * Canvas styling
+
+function drawColorPallet() {
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) {
+    return;
+  }
+
+  for (let i = 0; i < 6; i += 1) {
+    for (let j = 0; j < 6; j += 1) {
+      ctx.fillStyle = `rgb(${Math.floor(255 - 42.5 * i)} ${Math.floor(
+        255 - 42.5 * j
+      )} 0)`;
+
+      ctx.fillRect(j * 25, i * 25, 25, 25);
+    }
+  }
+}
+
+// drawColorPallet();
+
+function drawColorfulSquares() {
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return;
+  }
+  for (let i = 0; i < 6; i += 1) {
+    for (let j = 0; j < 6; j += 1) {
+      ctx.strokeStyle = `rgb(0 , ${Math.floor(255 - 42.5 * i)} , ${
+        255 * 42.6 * j
+      })`;
+      ctx.beginPath();
+      ctx.arc(12.5 + j * 25, 12.5 + i * 25, 10, 0, Math.PI * 2, true);
+      ctx.stroke();
+    }
+  }
+}
+
+// drawColorfulSquares();
+
+function implementGlobalTransparency() {
+  const ctx = (
+    document.getElementById("canvas") as HTMLCanvasElement
+  ).getContext("2d");
+  if (!ctx) {
+    return;
+  }
+
+  ctx.fillStyle = "#FD0";
+  ctx.fillRect(0, 0, 75, 75);
+  ctx.fillStyle = "#6C0";
+  ctx.fillRect(75, 0, 75, 75);
+  ctx.fillStyle = "#09f";
+  ctx.fillRect(0, 75, 75, 75);
+  ctx.fillStyle = "#F30";
+  ctx.fillRect(75, 75, 75, 75);
+
+  ctx.fillStyle = "#fff";
+  ctx.globalAlpha = 0.2;
+
+  for (let i = 0; i < 7; i += 1) {
+    ctx.beginPath();
+    ctx.arc(75, 75, 10 + 10 * i, 0, Math.PI * 2, true);
+    ctx.fill();
+  }
+}
+
+// implementGlobalTransparency();
+
+function rgbWithAlphaTransparency() {
+  const ctx = (
+    document.getElementById("canvas") as HTMLCanvasElement
+  ).getContext("2d");
+
+  if (!ctx) {
+    return;
+  }
+  ctx.fillStyle = "rgb(255 221 0)";
+  ctx.fillRect(0, 0, 150, 37.5);
+
+  ctx.fillStyle = "rgb(102 204 0)";
+  ctx.fillRect(0, 37.5, 150, 37.5);
+
+  ctx.fillStyle = "rgb(0 153 255)";
+  ctx.fillRect(0, 75, 150, 37.5);
+
+  ctx.fillStyle = "rgb(255 51 0)";
+  ctx.fillRect(0, 112.5, 150, 37.5);
+
+  for (let i = 0; i < 10; i += 1) {
+    ctx.fillStyle = `rgb(255 255 255 /${(i + 1) / 10})`;
+    for (let j = 0; j < 4; j += 1) {
+      ctx.fillRect(i * 15, j * 37.5, 15, 37.5);
+    }
+  }
+}
+
+rgbWithAlphaTransparency();
