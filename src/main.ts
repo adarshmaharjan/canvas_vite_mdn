@@ -675,4 +675,141 @@ function rgbWithAlphaTransparency() {
   }
 }
 
-rgbWithAlphaTransparency();
+// rgbWithAlphaTransparency();
+
+function lineWidthImplementation() {
+  const ctx = (
+    document.getElementById("canvas") as HTMLCanvasElement
+  ).getContext("2d");
+
+  if (!ctx) {
+    return;
+  }
+
+  for (let i = 0; i < 10; i += 1) {
+    ctx.lineWidth = 1 + i;
+
+    ctx.beginPath();
+    ctx.moveTo(5 + i * 15, 5);
+    ctx.lineTo(5 + i * 15, 140);
+    ctx.stroke();
+  }
+}
+
+// lineWidthImplementation();
+
+function generateCrispLine() {
+  const ctx = (
+    document.getElementById("canvas") as HTMLCanvasElement
+  ).getContext("2d");
+
+  if (!ctx) {
+    return;
+  }
+  // create vertical line
+  ctx.lineWidth = 10;
+  for (let i = 0; i < 10; i += 1) {
+    ctx.beginPath();
+    ctx.moveTo(10 + i * 20, 0);
+    ctx.lineTo(10 + i * 20, 200);
+    ctx.stroke();
+  }
+
+  ctx.lineWidth = 10;
+
+  for (let i = 0; i < 10; i += 1) {
+    ctx.beginPath();
+    ctx.moveTo(0, 10 + i * 20);
+    ctx.lineTo(200, 10 + i * 20);
+    ctx.stroke();
+  }
+}
+
+// generateCrispLine();
+
+function drawSmallLines() {
+  const ctx = (
+    document.getElementById("canvas") as HTMLCanvasElement
+  ).getContext("2d");
+
+  if (!ctx) {
+    return;
+  }
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 10; i++) {
+    ctx.beginPath();
+    ctx.moveTo(5 + i * 14, 5);
+    ctx.lineTo(5 + i * 14, 140);
+    ctx.stroke();
+  }
+
+  for (let i = 0; i < 10; i++) {
+    ctx.beginPath();
+    ctx.moveTo(5, 5 + i * 14);
+    ctx.lineTo(140, 5 + i * 14);
+    ctx.stroke();
+  }
+}
+
+// implement small line
+// drawSmallLines();
+
+function implementLineCap() {
+  const ctx = (
+    document.getElementById("canvas") as HTMLCanvasElement
+  ).getContext("2d");
+
+  if (!ctx) {
+    return;
+  }
+
+  ctx.strokeStyle = "#09f";
+  ctx.beginPath();
+
+  ctx.moveTo(10, 10);
+  ctx.lineTo(140, 10);
+  ctx.moveTo(10, 140);
+  ctx.lineTo(140, 140);
+  ctx.stroke();
+
+  ctx.strokeStyle = "#000";
+  ["butt", "round", "square"].forEach((lineCap, i) => {
+    ctx.lineWidth = 15;
+
+    ctx.lineCap = lineCap as CanvasLineCap;
+
+    ctx.beginPath();
+
+    ctx.moveTo(25 + i * 50, 10);
+
+    ctx.lineTo(25 + i * 50, 140);
+    ctx.stroke();
+  });
+}
+
+// implement line cap
+// implementLineCap();
+
+function strokedArrow() {
+  const ctx = (
+    document.getElementById("canvas") as HTMLCanvasElement
+  ).getContext("2d");
+
+  if (!ctx) {
+    return;
+  }
+  ctx.lineWidth = 10;
+  ["round", "bevel", "miter"].forEach((lineJoin, i) => {
+    ctx.lineJoin = lineJoin as CanvasLineJoin;
+    ctx.beginPath();
+    ctx.moveTo(-5, 5 + i * 40);
+    ctx.lineTo(35, 45 + i * 40);
+    ctx.lineTo(75, 5 + i * 40);
+    ctx.lineTo(115, 45 + i * 40);
+    ctx.lineTo(155, 5 + i * 40);
+    ctx.stroke();
+  });
+}
+
+// implement line join
+strokedArrow();
